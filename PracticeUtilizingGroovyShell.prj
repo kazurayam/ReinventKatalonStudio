@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
    <description></description>
-   <name>ReinventKatalonStudio</name>
+   <name>ReinventTestCaseInvokation</name>
    <tag></tag>
    <UUID>83e23eeb-2a0c-4f80-bb7e-2f37e70e4f74</UUID>
    <migratedVersion>5.9.0</migratedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
-   <projectFileLocation>/Users/kazuakiurayama/katalon-workspace/PracticeUtilizingGroovyShell/PracticeUtilizingGroovyShell.prj</projectFileLocation>
+   <projectFileLocation>/Users/kazuakiurayama/katalon-workspace/ReinventKatalonStudio/PracticeUtilizingGroovyShell.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>
