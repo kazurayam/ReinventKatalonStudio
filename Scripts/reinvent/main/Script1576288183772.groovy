@@ -5,7 +5,7 @@ import java.nio.file.Paths
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-Path findExternalScript(Script scriptName) {
+Path findExternalScript(String scriptName) {
 	Path project = Paths.get(RunConfiguration.getProjectDir())
 	return findExternalScript(project, scriptName)
 }
@@ -18,9 +18,9 @@ Path findExternalScript(Path basedir, String scriptName) {
 }
 List<Path> findExternalScripts() {
 	Path project = Paths.get(RunConfiguration.getProjectDir())
+	return findExternalScripts(project)
 }
 List<Path> findExternalScripts(Path basedir) {
-	Path project = Paths.get(RunConfiguration.getProjectDir())
 	Path scripts = basedir.resolve('Include/externalScripts')
 	return Files.walk(scripts)
 		.filter { item -> Files.isRegularFile(item) && item.toString().endsWith('.groovy') }
