@@ -1,9 +1,29 @@
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-
+import java.nio.charset.StandardCharsets
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+
+def callExternalScript(Reader reader) {
+	def shell = new GroovyShell()
+	return shell.evaluate(reader)
+}
+
+def callExternalScript(Path path) {
+	WebUI.comment(">>> callin up ${path}")
+	Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)
+	return callExternalScript(reader)
+}
+def callExternalScript(File file) {
+	WebUI.comment(">>> callin up ${file}")
+	Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8)
+	return callExternalScript(reader)
+}
+def callExternalScript(String string) {
+	Reader reader = new StringReader(string)
+	return callExternalScript(reader)
+}
 
 Path findExternalScript(String scriptName) {
 	Path project = Paths.get(RunConfiguration.getProjectDir())
@@ -28,12 +48,6 @@ List<Path> findExternalScripts(Path basedir) {
 }
 //println findExternalScripts()
 
-void callExternalScript(Path file) {
-	WebUI.comment(">>> callin up ${file}")
-	def shell = new GroovyShell()
-	shell.evaluate(file.toFile())
-}
-
 WebUI.comment(">>> activating a single script")
 callExternalScript(findExternalScript('FB.groovy'))
 
@@ -44,5 +58,6 @@ for (Path f in findExternalScripts()) {
 }
 
 // Execute scripts outside the project
-//Path dir = Paths.get("whatever/path/you/want")
-//callExternalScript(findExternalScript(dir))
+WebUI.comment("download a script from GitHub and immediately run it")
+String url = "https://raw.githubusercontent.com/kazurayam/ReinventTestCaseInvocation/master/Include/externalScripts/AMZN.groovy"
+callExternalScript(new URL(url).getText())
